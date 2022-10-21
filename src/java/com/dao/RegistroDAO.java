@@ -26,6 +26,26 @@ public class RegistroDAO {
         conexion = Conexion.getInstance();
     }
 
+    public int addRegistro(Registro newRegistro) throws SQLException {
+        String query = "insert into registro (idParque,usuarioCreador,fechaCreacion) values (?,?,?)";
+        try {
+            PreparedStatement psmt = conexion.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            psmt.setInt(1, newRegistro.getIdParque());
+            psmt.setString(2, newRegistro.getUsuarioCreador());
+            psmt.setDate(3, newRegistro.getFechaCreacion());
+            psmt.executeUpdate();
+            ResultSet rs = psmt.getGeneratedKeys();
+            if (rs.next()) {
+                int idRegistro = rs.getInt(1);
+                return idRegistro;
+            } else {
+                return -1;
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
     public List<Registro> getAllRegistros() throws SQLException {
         List<Registro> allRegistros = new ArrayList<>();
         String query = "select * from registro";

@@ -23,6 +23,12 @@ public class DetalleRegistro {
 
     public DetalleRegistro() {
     }
+    
+    public DetalleRegistro(int idRegistro, int idClasificacion, int totalVisitantes) {
+        this.idRegistro = idRegistro;
+        this.idClasificacion = idClasificacion;
+        this.totalVisitantes = totalVisitantes;
+    }
 
     public DetalleRegistro(int idDetalle, int idRegistro, int idClasificacion, int totalVisitantes) {
         this.idDetalle = idDetalle;

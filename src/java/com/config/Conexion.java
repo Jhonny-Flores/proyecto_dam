@@ -19,7 +19,7 @@ public class Conexion {
     private Connection connection;
     private final String URL = "jdbc:mysql://localhost:3306/dbparques";
     private final String USERNAME = "root";
-    private final String PASSWORD = "031919";
+    private final String PASSWORD = "";
     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     private Conexion() throws SQLException, ClassNotFoundException {

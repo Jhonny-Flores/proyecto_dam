@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  *
  * @author rober
@@ -22,6 +23,38 @@ public class DetalleRegistroDAO {
 
     public DetalleRegistroDAO() throws SQLException, ClassNotFoundException {
         conexion = Conexion.getInstance();
+    }
+    
+    public int addDetallesRegistro(List<DetalleRegistro> detalles) throws SQLException {
+        conexion.getConnection().setAutoCommit(false);
+        String query = "insert into DetalleRegistro (idRegistro,idClasificacion,totalVisitantes) values (?,?,?)";
+        try {
+            PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
+            Iterator<DetalleRegistro> it = detalles.iterator();
+            while (it.hasNext()) {
+                DetalleRegistro dr = it.next();
+                psmt.setInt(1, dr.getIdRegistro());
+                psmt.setInt(2, dr.getIdClasificacion());
+                psmt.setInt(3, dr.getTotalVisitantes());
+                psmt.addBatch();
+
+            }
+            int[] numUpdates = psmt.executeBatch();
+            for (int i = 0; i < numUpdates.length; i++) {
+                if (numUpdates[i] == -2) {
+                    System.out.println("Execution " + i
+                            + ": unknown number of rows updated");
+                } else {
+                    System.out.println("Execution " + i
+                            + "successful: " + numUpdates[i] + " rows updated");
+                }
+            }
+            conexion.getConnection().commit();
+            conexion.getConnection().setAutoCommit(true);
+            return numUpdates.length;
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     public List<DetalleRegistro> getAllDetallesRegistros() throws SQLException {

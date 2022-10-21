@@ -39,9 +39,11 @@
             }
             if (logeado) {
         %>
-        <nav>
-            <%@include file="/WEB-INF/recursos/header.jsp" %>
-        </nav>
+        <header>
+            <jsp:include page="WEB-INF/recursos/header.jsp">
+                <jsp:param name="tipo" value="Estadistica"/>
+            </jsp:include>
+        </header>
         <main>
             <div class="container">
                 <h1>Estadisticas</h1>

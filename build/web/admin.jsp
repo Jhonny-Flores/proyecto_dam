@@ -39,7 +39,11 @@
             }
             if (logeado) {
         %>
-        <%@include file="/WEB-INF/recursos/header.jsp" %>
+        <header>
+            <jsp:include page="WEB-INF/recursos/header.jsp">
+                <jsp:param name="tipo" value="Administrador"/>
+            </jsp:include>
+        </header>
         <main>
             <div class="container">
                 <h1>Administrador</h1>

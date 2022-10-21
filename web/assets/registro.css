@@ -1,0 +1,25 @@
+/* 
+    Created on : 19 oct. 2022, 19:46:45
+    Author     : C3rberus
+*/
+
+@media screen and (max-width: 767px) {
+    .img-test {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) { 
+    .img-test {
+        width: 128px;
+        height: 128px;
+    }
+}
+
+@media (min-width: 768px) { 
+    .img-test {
+        width: 128px;
+        height: 128px;
+    }
+}
