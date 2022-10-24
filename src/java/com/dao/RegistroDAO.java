@@ -8,7 +8,7 @@ import com.config.Conexion;
 import java.sql.SQLException;
 import java.util.List;
 import com.models.Registro;
-import java.util.Date;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -24,6 +24,19 @@ public class RegistroDAO {
 
     public RegistroDAO() throws SQLException, ClassNotFoundException {
         conexion = Conexion.getInstance();
+    }
+    
+    public boolean checkDate(Date fecha, int idParque) throws SQLException {
+        String query = "select * from registro where fechaCreacion = ? and idParque = ?;";
+        try {
+            PreparedStatement pstm = conexion.getConnection().prepareStatement(query);
+            pstm.setDate(1, fecha);
+            pstm.setInt(2, idParque);
+            ResultSet rs = pstm.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     public int addRegistro(Registro newRegistro) throws SQLException {

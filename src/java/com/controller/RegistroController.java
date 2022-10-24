@@ -79,16 +79,25 @@ public class RegistroController extends HttpServlet {
                 switch (request.getParameter("method")) {
                     case "addRegister":
                         Registro register = new Registro();
-                        register.setIdParque(Integer.parseInt(request.getParameter("idParque")));
-                        register.setUsuarioCreador(request.getParameter("usuarioCreador"));
-                        LocalDate date = LocalDate.parse(request.getParameter("fechaCreacion"));
-                        register.setFechaCreacion(Date.valueOf(date));
-                        int newRegister = this.registroDAO.addRegistro(register);
-                        if (newRegister != -1) {
-                            out.print(gsonConverter.toJson(String.format("{\"idRegister\": %s}", newRegister)));
-                        } else {
+                        String fechaCreacion = request.getParameter("fechaCreacion");
+                        int idParque = Integer.parseInt(request.getParameter("idParque"));
+                        LocalDate date = LocalDate.parse(fechaCreacion);
+                        boolean existe = this.registroDAO.checkDate(Date.valueOf(date), idParque);
+                        if (existe) {
                             out.print(gsonConverter.toJson(null));
+                            response.sendError(500, "La fecha Ingresada ya posee un registro, solo es posible agregar un registro por dia por parque");
+                        } else {
+                            register.setIdParque(idParque);
+                            register.setUsuarioCreador(request.getParameter("usuarioCreador"));
+                            register.setFechaCreacion(Date.valueOf(date));
+                            int newRegister = this.registroDAO.addRegistro(register);
+                            if (newRegister != -1) {
+                                out.print(gsonConverter.toJson(String.format("{\"idRegister\": %s}", newRegister)));
+                            } else {
+                                out.print(gsonConverter.toJson(null));
+                            }
                         }
+
                         break;
                     default:
                         throw new AssertionError();

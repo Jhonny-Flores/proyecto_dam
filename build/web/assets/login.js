@@ -26,7 +26,7 @@ $(document).ready(function () {
                     } else if(resp.rol === "Registro") {
                         window.location.replace("registro.jsp");
                     } else if(resp.rol === "Estadistica") {
-                        window.location.replace("estadistica.jsp");
+                        window.location.replace("estadisticas.jsp");
                     } else if(resp.rol === "Reporte") {
                         window.location.replace("reporte.jsp");
                     }

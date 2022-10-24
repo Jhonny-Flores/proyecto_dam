@@ -70,7 +70,12 @@ $(document).ready(function () {
                 })
             }
         }).fail((error) => {
-            console.log(error);
+            console.log(error.statusText);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `El servidor dice: ${error.statusText}`,
+            });
         })
     })
 });
