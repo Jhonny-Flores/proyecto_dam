@@ -28,10 +28,24 @@
         <script type="text/javascript" src="assets/logout.js"></script>
     </head>
     <body class="masthead" style="background-image: url('https://images2.alphacoders.com/894/894456.jpg');">
-
-
-        <br>
-        <br>
+        <%
+            boolean logeado = false;
+            Cookie[] cookies = request.getCookies();
+            String valores = "";
+            //Verificar si esta logeado
+            if (cookies != null) {
+                for (Cookie c : cookies) {
+                    if (c.getName().equals("logeado") && c.getValue().contains("rol") && c.getValue().contains("Administrador")) {
+                        System.out.println(c.getValue());
+                        //Si existe la cookie, el visitante ya esta logeado
+                        valores = c.getValue();
+                        logeado = true;
+                        break;
+                    }
+                }
+            }
+            if (logeado) {
+        %>
         <main class="mt-5 mb-3">
             <div class="container py-3 bg-light text-dark opacity-100 ">
 
@@ -80,7 +94,7 @@
 
                                     <td>
                                         <a class="btn btn-outline-light " type="submit" href="javascript:cargar(<%=pa.getIdParque()%>,'<%=pa.getNombre()%>','<%=pa.getPais()%>','<%=pa.getEstado()%>','<%=pa.getCiudad()%>','<%=pa.getDireccion()%>')"><img src="assets/editar.png"/></a>
-                                        <a class="btn btn-outline-light " type="submit" href="javascript:eliminar(<%=pa.getIdParque()%>)"><img src="assets/eliminar.png"/></a>
+                                       <!-- <a class="btn btn-outline-light " type="submit" href="javascript:eliminar(<%=pa.getIdParque()%>)"><img src="assets/eliminar.png"/></a>-->
                                     </td>
                                 </tr>
                                 <%}%>
@@ -90,6 +104,11 @@
                 </div>
             </div>
         </main>
+        <%
+            } else {
+                response.sendError(response.SC_PROXY_AUTHENTICATION_REQUIRED, "Credenciales Incorrectas");
+            }
+        %>
     </body>
 </html>
 
@@ -97,7 +116,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Parques</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel">Agregar Parques</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="form1" >
@@ -115,9 +134,11 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnCerrarModal" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <button type=" submit" id="btnGuardar" name="method" class="btn btn-primary btn-sm"
-                            value="Guardar"><i class="bi bi-save"></i> Guardar</button>
+                    <button type="button" id="btnCerrarModal" class="btn btn-outline-light" data-bs-dismiss="modal">
+                        <img src="assets/cerrar-sesion.png"/>
+                    </button>
+                    <button type=" submit" id="btnGuardar" name="method" class="btn btn-outline-light"
+                            value="Guardar"><img src="assets/disquete.png"/></button>
 
                 </div>
             </form>
@@ -149,9 +170,13 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnCerrarModal1" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" id="btnModificar" name="btnModificar" class="btn btn-warning btn-sm"
-                           value="Modificar">
+                    <button type="button" id="btnCerrarModal" class="btn btn-outline-light" data-bs-dismiss="modal">
+                        <img src="assets/cerrar-sesion.png"/>
+                    </button>
+                    <button type="submit" id="btnModificar" name="btnModificar" class="btn btn-outline-light"
+                            value="Modificar">
+                        <img src="assets/editar.png"/>
+                    </button>
                 </div>
             </form>
         </div>

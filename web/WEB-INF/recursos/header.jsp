@@ -24,7 +24,7 @@
                     <a class="nav-link active" aria-current="page" href="admin.jsp">Empleados/Usuarios</a>
                 </li>
                 <li>
-                    <a class="nav-link active" aria-current="page" href="admin.jsp">Parques</a>
+                    <a class="nav-link active" aria-current="page" href="parque.jsp">Parques</a>
                 </li>
                 <%
                     } else if (tipo.equals("Registro")){
