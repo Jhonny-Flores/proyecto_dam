@@ -13,48 +13,6 @@ async function cargar(idParque, nombre, pais, estado, ciudad, direccion) {
     $("#txtDireccion1").val(direccion);
 }
 
-function eliminar(idParque){
-    Swal.fire({
-        title: 'Esta seguro que desea eliminar el producto?',
-        showDenyButton: true,
-        confirmButtonText: 'Eliminar',
-        denyButtonText: `Cancelar`,
-    }).then((result) => {
-        if (result.isConfirmed) {
-                //codigo
-                $.ajax({
-                    url:'ParqueController',
-                    type:'POST',
-                    data:{method:'eliminarParque',idParque:idParque}
-                }).done(function(resp){
-                    if(resp){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Eliminado Correctamente',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        cargarTabla();
-                    }else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Error al Eliminar1111',
-                        })
-                    }
-                }).fail(function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Error al Eliminar',
-                    })
-                });
-            } else if (result.isDenied) {
-                Swal.fire('Producto no Eliminado', '', 'info')
-            }
-        });
-}
-
 
 $(document).ready(function () {
 

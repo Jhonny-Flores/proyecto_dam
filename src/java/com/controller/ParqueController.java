@@ -131,8 +131,6 @@ public class ParqueController extends HttpServlet {
                             out.print(gsonConverter.toJson(null));
                         }
                         break;
-                    case "EliminarParque": 
-                        break;
                     case "getParques":
                         List<Parque> listadoParques = new ArrayList<>();
                         listadoParques = parqueDao.getAllParques();

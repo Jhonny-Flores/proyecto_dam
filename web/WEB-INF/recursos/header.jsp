@@ -8,7 +8,7 @@
 <%
     String tipo = request.getParameter("tipo");
 %>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light" style="--bs-bg-opacity: .35;" >
     <div class="container">
         <a class="navbar-brand" href="#">Administrador Parques</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,20 +26,22 @@
                 <li>
                     <a class="nav-link active" aria-current="page" href="parques.jsp">Parques</a>
                 </li>
-                <%
-                    } else if (tipo.equals("Registro")){
+                <li>
+                    <a class="nav-link active" aria-current="page" href="admin.jsp">Home</a>
+                </li>
+                <%                } else if (tipo.equals("Registro")) {
                 %>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="registro.jsp">Registro Visitantes</a>
                 </li>
                 <%
-                    } else if (tipo.equals("Estadistica")){
+                } else if (tipo.equals("Estadistica")) {
                 %>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="estadisticas.jsp">Estadisticas Visitantes</a>
                 </li>
                 <%
-                    } else if (tipo.equals("Reportes")){
+                } else if (tipo.equals("Reportes")) {
                 %>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="reportes.jsp">Reportes Visitantes</a>

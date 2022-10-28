@@ -47,7 +47,7 @@
             if (logeado) {
         %>
         <main class="mt-5 mb-3">
-            <div class="container py-3 bg-light text-dark opacity-100 ">
+            <div class="container py-3 bg-light text-dark opacity-100 " style="--bs-bg-opacity: .85;">
 
 
                 <div class="">
