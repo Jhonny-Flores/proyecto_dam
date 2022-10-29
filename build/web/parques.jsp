@@ -29,6 +29,9 @@
     </head>
     <body class="masthead" style="background-image: url('https://images2.alphacoders.com/894/894456.jpg');">
         <%
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setHeader("Pragma", "no-cache");
+            response.setHeader("Expires", "0");
             boolean logeado = false;
             Cookie[] cookies = request.getCookies();
             String valores = "";

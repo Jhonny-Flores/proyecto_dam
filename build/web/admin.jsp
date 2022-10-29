@@ -23,6 +23,10 @@
     <body class="bg-primary p-2" style="--bs-bg-opacity: .25;");" >
         <div class="container" >
             <%
+                response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                response.setHeader("Pragma", "no-cache");
+                response.setHeader("Expires", "0");
+                
                 boolean logeado = false;
                 Cookie[] cookies = request.getCookies();
                 String valores = "";
