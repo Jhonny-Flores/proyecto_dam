@@ -21,7 +21,7 @@
 
                 %>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="admin.jsp">Empleados/Usuarios</a>
+                    <a class="nav-link active" aria-current="page" href="empleados.jsp">Empleados/Usuarios</a>
                 </li>
                 <li>
                     <a class="nav-link active" aria-current="page" href="parques.jsp">Parques</a>

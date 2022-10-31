@@ -8,6 +8,10 @@
         <servlet-name>RegistroController</servlet-name>
         <servlet-class>com.controller.RegistroController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmpleadoController</servlet-name>
+        <servlet-class>com.controller.EmpleadoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DetalleRegistroController</servlet-name>
         <url-pattern>/DetalleRegistroController</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>RegistroController</servlet-name>
         <url-pattern>/RegistroController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmpleadoController</servlet-name>
+        <url-pattern>/EmpleadoController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

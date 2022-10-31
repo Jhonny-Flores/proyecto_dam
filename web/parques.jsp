@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="assets/parque.js"></script>
-        <script type="text/javascript" src="assets/logout.js"></script>
+        <%-- <script type="text/javascript" src="assets/logout.js"></script> --%>
     </head>
     <body class="masthead" style="background-image: url('https://images2.alphacoders.com/894/894456.jpg');">
         <%
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </main>              
         <%
             } else {
                 response.sendError(response.SC_PROXY_AUTHENTICATION_REQUIRED, "Credenciales Incorrectas");
