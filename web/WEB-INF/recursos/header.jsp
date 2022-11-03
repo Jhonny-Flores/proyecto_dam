@@ -21,7 +21,10 @@
 
                 %>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="empleados.jsp">Empleados/Usuarios</a>
+                    <a class="nav-link active" aria-current="page" href="empleados.jsp">Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="usuarios.jsp">Usuarios</a>
                 </li>
                 <li>
                     <a class="nav-link active" aria-current="page" href="parques.jsp">Parques</a>
@@ -50,7 +53,7 @@
                     }
                 %>
             </ul>
-            <form class="d-flex" method="post" id="frmLogout" action="UsuarioController" role="search">
+            <form class="d-flex" method="post" id="frmLogout" action="UsuarioController">
                 <button class="btn btn-outline-danger" type="submit" name="method" value="logOut">Salir <i class="bi bi-box-arrow-left"></i></button>
             </form>
         </div>

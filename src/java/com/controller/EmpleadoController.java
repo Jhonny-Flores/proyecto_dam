@@ -93,7 +93,7 @@ public class EmpleadoController extends HttpServlet {
                         break;
                     case "ModificarEmpleado":
                         Empleado empleado1 = new Empleado();
-                        int idEmpleado1 = Integer.parseInt(request.getParameter("txtIdEmpleado1"));
+                        int idEmpleado1 = Integer.parseInt(request.getParameter("idEmpleado1"));
                         String nombre1 = request.getParameter("nombre1");
                         String apellido1 = request.getParameter("apellido1");
                         String edad1 = request.getParameter("edad1");
@@ -132,7 +132,7 @@ public class EmpleadoController extends HttpServlet {
                         
                         empleado2.setIdEmpleado(idEmpleado);
                         
-                        empleadoDAO.deleteEmpleado(idEmpleado);
+                        this.empleadoDAO.deleteEmpleado(idEmpleado);
                         
                         if (empleadoDAO != null) {
                             out.print(gsonConverter.toJson(String.format("{\"idEmpleado\": %s}", empleadoDAO)));
