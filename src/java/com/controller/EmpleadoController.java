@@ -126,6 +126,15 @@ public class EmpleadoController extends HttpServlet {
                             out.print(gsonConverter.toJson(null));
                         }
                         break;
+                    case "getEmpleadosWAccount":
+                        List<Empleado> listadoEmpleadosW = new ArrayList<>();
+                        listadoEmpleadosW = empleadoDAO.getAllEmpleadosWithoutAccount();
+                        if(!listadoEmpleadosW.isEmpty()){
+                            out.print(gsonConverter.toJson(listadoEmpleadosW));
+                        } else {
+                            out.print(gsonConverter.toJson(null));
+                        }
+                        break;
                     case "eliminarEmpleado":
                         Empleado empleado2 = new Empleado();
                         int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado1"));

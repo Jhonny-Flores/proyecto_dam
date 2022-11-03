@@ -4,7 +4,14 @@
     Author     : C3rberus
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.models.Usuario"%>
+<%@page import="com.dao.UsuarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    UsuarioDAO daoUsuario = new UsuarioDAO();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +23,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="assets/empleado.js"></script>
+        <script src="assets/usuarios.js"></script>
         <script type="text/javascript" src="assets/logout.js"></script>
     </head>
     <body>
@@ -58,6 +65,44 @@
                 </button>
                 <hr>
                 <div class="row">
+                    <div class="col">
+                        <table class="table table-responsive table-hover table-sm mt-4 " id="tabla">
+                            <thead>
+                            <th>Username</th>
+                            <th>ID Empleado</th>
+                            <th>ROL</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                            </thead>
+
+                            <tbody>
+                                <%
+                                    List<Usuario> listaUsuarios = daoUsuario.getAllUsuarios();
+                                    for (Usuario us : listaUsuarios) {
+                                %>
+                                <tr>
+                                    <td><%=us.getUsername()%></td>
+                                    <td><%=us.getIdEmpleado()%></td>
+                                    <td><%=us.getRol()%></td>
+                                    <td><%=us.getEstado()%></td>
+
+                                    <td>
+                                        <a class="btn btn-outline-dark " type="submit" href="javascript:cargar('<%=us.getUsername()%>','<%=us.getIdEmpleado()%>','<%=us.getRol()%>','<%=us.getEstado()%>')">Editar</a>
+                                        <% if (us.getEstado().equals("Activo")) {
+                                        %>
+                                        <a class="btn btn-outline-dark " type="submit" href="javascript:desactivar('<%=us.getUsername()%>')">Desactivar</a>
+                                        <% } else {
+                                        %>
+                                        <a class="btn btn-outline-dark " type="submit" href="javascript:activar('<%=us.getUsername()%>')">Activar</a>
+                                        <%
+                                            }
+                                        %>
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
@@ -67,4 +112,100 @@
             }
         %>
     </body>
+    <div class="modal fade" id="ModalAgregarUsuario" tabindex="-1" aria-labelledby="ModalAgregarUsuarioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalAgregarUsuarioLabel">Agregar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="frmAgregarUsuario">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="txtUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="txtUsername" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="txtPassword" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectEmpleado" class="form-label">Empleado</label>
+                            <select id="selectEmpleado" class="form-select" name="idEmpleado" required>
+                                <option value="" selected="">Seleccione un Empleado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectRol" class="form-label">Rol</label>
+                            <select id="selectRol" class="form-select" name="rol" required>
+                                <option value="" selected="">Seleccione un Rol</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Estadistica">Estadistica</option>
+                                <option value="Reporte">Reporte</option>
+                                <option value="Registro">Registro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnCerrarModal" class="btn btn-outline-light" data-bs-dismiss="modal">
+                            <img src="assets/cerrar-sesion.png"/>
+                        </button>
+                        <button type="submit" id="btnModificar" name="btnModificar" class="btn btn-outline-light"
+                                value="Modificar">
+                            <img src="assets/editar.png"/>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalEditar" tabindex="-1" aria-labelledby="ModalEditarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalEditarLabel">Agregar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="frmEditarUsuario">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="txtUsername1" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="txtUsername1" name="username" readonly="" disabled="">
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" data-toggle="toggle" type="checkbox" role="switch"
+                                   id="switchPassword" readonly>
+                            <label class="form-check-label" for="switchPassword">Actualizar contraseña</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input disabled placeholder="Contraseña" id="txtPasswordUpdate" name="pswd" required
+                                   class="form-control" type="password"/>
+                            <label for="txtPasswordUpdate">Contraseña</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectRol1" class="form-label">Rol</label>
+                            <select id="selectRol1" class="form-select" name="rol" required>
+                                <option value="" selected="">Seleccione un Rol</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Estadistica">Estadistica</option>
+                                <option value="Reporte">Reporte</option>
+                                <option value="Registro">Registro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnCerrarModal" class="btn btn-outline-light" data-bs-dismiss="modal">
+                            <img src="assets/cerrar-sesion.png"/>
+                        </button>
+                        <button type="submit" id="btnModificar" name="btnModificar" class="btn btn-outline-light"
+                                value="Modificar">
+                            <img src="assets/editar.png"/>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </html>

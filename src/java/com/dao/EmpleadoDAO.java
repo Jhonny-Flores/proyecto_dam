@@ -75,6 +75,31 @@ public class EmpleadoDAO {
             throw e;
         }
     }
+    
+    public List<Empleado> getAllEmpleadosWithoutAccount() throws SQLException {
+        List<Empleado> allEmpleados = new ArrayList<>();
+        String query = "select * from empleado where idEmpleado not in (select idEmpleado from usuario)";
+        try {
+            Statement st = conexion.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Empleado empleado = new Empleado();
+                empleado.setIdEmpleado(rs.getInt(1));
+                empleado.setIdParque(rs.getInt(2));
+                empleado.setNombre(rs.getString(3));
+                empleado.setApellido(rs.getString(4));
+                empleado.setEdad(rs.getInt(5));
+                empleado.setTelefono(rs.getString(6));
+                empleado.setDireccion(rs.getString(7));
+                allEmpleados.add(empleado);
+            }
+            return allEmpleados;
+
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public Empleado getEmpleadoById(int id) throws SQLException {
         String query = "select * from empleado where idEmpleado=?";

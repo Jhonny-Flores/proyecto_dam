@@ -83,8 +83,77 @@ public class UsuarioController extends HttpServlet {
                         }
                         break;
 
+                    case "InsertarUsuario":
+                        Usuario us1 = new Usuario();
+                        String usernameA = request.getParameter("username");
+                        String passwordA = request.getParameter("password");
+                        int idEmpleadoA = Integer.parseInt(request.getParameter("idEmpleado"));
+                        String rolA = request.getParameter("rol");
+
+                        us1.setUsername(usernameA);
+                        us1.setPswd(passwordA);
+                        us1.setIdEmpleado(idEmpleadoA);
+                        us1.setRol(rolA);
+                        us1.setEstado("Activo");
+
+                        int resultado1 = this.usuarioDao.signUp(us1);
+
+                        if (resultado1 > 0) {
+                            out.print(gsonConverter.toJson("{\"estado\": GG}"));
+                        } else {
+                            out.print(gsonConverter.toJson(null));
+                            response.sendError(500, "Error");
+                        }
+
+                        break;
+
+                    case "UpdateUser":
+                        String usernameU = request.getParameter("username");
+                        String passwordU = request.getParameter("password");
+                        String rolU = request.getParameter("rol");
+                        int resultado2;
+                        if (passwordU.isEmpty()) {
+                            System.out.println("sin password");
+                            resultado2 = this.usuarioDao.updateUserRol(usernameU, rolU);
+                        } else {
+                            System.out.println("Todo");
+                            resultado2 = this.usuarioDao.updateUserAll(usernameU, passwordU, rolU);
+                        }
+
+                        if (resultado2 > 0) {
+                            out.print(gsonConverter.toJson("{\"estado\": GG}"));
+                        } else {
+                            out.print(gsonConverter.toJson(null));
+                            response.sendError(500, "Error");
+                        }
+
+                        break;
                     case "checkUser":
                         out.print(new Gson().toJson(this.usuarioDao.isUserNew(request.getParameter("username"))));
+                        break;
+
+                    case "deactivateUser":
+                        String username1 = request.getParameter("username");
+                        int estado1 = usuarioDao.disableUser(username1);
+
+                        if (estado1 > 0) {
+                            out.print(gsonConverter.toJson("{\"estado\": GG}"));
+                        } else {
+                            out.print(gsonConverter.toJson(null));
+                            response.sendError(500, "Error");
+                        }
+                        break;
+
+                    case "activateUser":
+                        String username2 = request.getParameter("username");
+                        int estado2 = usuarioDao.enableUser(username2);
+
+                        if (estado2 > 0) {
+                            out.print(gsonConverter.toJson("{\"estado\": GG}"));
+                        } else {
+                            out.print(gsonConverter.toJson(null));
+                            response.sendError(500, "Error");
+                        }
                         break;
 
                     case "logOut":

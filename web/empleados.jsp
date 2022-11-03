@@ -133,9 +133,9 @@
             </div>
                 <form id="frmEmpleadoModificar" >
                 <div class="modal-body">
-                    <label class="form-label" for="txtIdEmpleado1">Nombre Empleado</label>
+                    <label class="form-label" for="txtIdEmpleado1">Id Empleado</label>
                     <input type="number" id="txtIdEmpleado1" name="idEmpleado"
-                           placeholder="ID Empleado" required class="form-control"><br>
+                           placeholder="ID Empleado" required class="form-control" readonly="" disabled=""><br>
                     
                     <label class="form-label" for="txtNombre1">Nombre Empleado</label>
                     <input type="text" id="txtNombre1" name="txtNombre1"
@@ -217,46 +217,6 @@
                     <button type="submit" id="btnModificarAgregarEmpleado" name="btnModificarAgregarEmpleado" class="btn btn-outline-light"
                             value="Guardar">
                         <img src="assets/disquete.png"/>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalAgregarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="form">
-                <div class="modal-body">
-                    <input type="text" id="txtUsuario" name="txtUsuario"
-                           placeholder="Ingrese el usuario" required class="form-control"><br>
-                    <input type="text" id="txtApellido" name="txtApellido"
-                           placeholder="Apellido" required class="form-control"><br>
-                    <input type="text" id="txtEdad" name="txtEdad"
-                           placeholder="Edad" required class="form-control"><br>
-                    <input type="text" id="txtTelefono" name="txtTelefono"
-                           placeholder="Teléfono" required class="form-control"><br>
-                    <input type="text" id="txtDireccion" name="txtDireccion"
-                           placeholder="Direccion" required class="form-control"><br>
-                    <!-- pendiente -->
-                    <select id="selectEmpleado" class="form-select" name="selectEmpleado">
-                        <option value="0">Seleccione empleado</option>
-                        <option value="1">Empleado 1</option>
-                        <option value="2">Empleado 2</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnCerrarModal" class="btn btn-outline-light" data-bs-dismiss="modal">
-                        <img src="assets/cerrar-sesion.png"/>
-                    </button>
-                    <button type="submit" id="btnModificar" name="btnModificar" class="btn btn-outline-light"
-                            value="Modificar">
-                        <img src="assets/editar.png"/>
                     </button>
                 </div>
             </form>

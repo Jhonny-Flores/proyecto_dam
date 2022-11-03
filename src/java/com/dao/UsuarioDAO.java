@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import com.models.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -39,6 +42,28 @@ public class UsuarioDAO {
             } else {
                 return null;
             }
+
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    
+    public List<Usuario> getAllUsuarios() throws SQLException {
+        List<Usuario> allUsuarios = new ArrayList<>();
+        String query = "select username, idEmpleado, rol, estado from usuario;";
+        try {
+            Statement st = conexion.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setUsername(rs.getString(1));
+                usuario.setIdEmpleado(rs.getInt(2));
+                usuario.setRol(rs.getString(3));
+                usuario.setEstado(rs.getString(4));
+                allUsuarios.add(usuario);
+            }
+            return allUsuarios;
 
         } catch (SQLException e) {
             throw e;
@@ -135,6 +160,31 @@ public class UsuarioDAO {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             psmt.setString(1, Utils.encrytPassword(password));
             psmt.setString(2, username);
+            return psmt.executeUpdate();
+        } catch (NoSuchAlgorithmException | SQLException e) {
+            throw e;
+        }
+    }
+    
+    public int updateUserRol(String username, String rol) throws NoSuchAlgorithmException, SQLException {
+        String query = "update usuario set rol = ? where username = ?";
+        try {
+            PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
+            psmt.setString(1, rol);
+            psmt.setString(2, username);
+            return psmt.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    
+    public int updateUserAll(String username, String password, String rol) throws NoSuchAlgorithmException, SQLException {
+        String query = "update usuario set pswd = ?, rol = ? where username = ?";
+        try {
+            PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
+            psmt.setString(1, Utils.encrytPassword(password));
+            psmt.setString(2, rol);
+            psmt.setString(3, username);
             return psmt.executeUpdate();
         } catch (NoSuchAlgorithmException | SQLException e) {
             throw e;

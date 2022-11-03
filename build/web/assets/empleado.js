@@ -125,29 +125,4 @@ $(document).ready(function () {
             });
         });
     });
-
-    $('#form1').submit(e => {
-        e.preventDefault();
-        $.ajax({
-            url: 'EmpleadoController',
-            type: 'POST',
-            data: {method: "ModificarEmpleado", idEmpleado1: $('#txtIdEmpleado1'), nombre1: $('#txtNombre1').val(), apellido: $('#txtApellido').val(), edad: $('#txtEdad').val(),
-                telefono: $('#txtTelefono').val(), direccion: $('#txtDireccion').val(), idParque: $('#selectParque')}
-        }).done((resp) => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Actualizado Correctamente',
-                text: 'La informacion ha sido Actualizada correctamente'
-            }).then(function () {
-                $('#form1')[0].reset();
-                location.reload();
-            })
-        }).fail((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tardeFFFFFFFF',
-            })
-        })
-    })
 });
