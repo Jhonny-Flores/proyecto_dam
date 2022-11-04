@@ -8,7 +8,7 @@
 <%
     String tipo = request.getParameter("tipo");
 %>
-<nav class="navbar navbar-expand-lg bg-light" style="--bs-bg-opacity: .35;" >
+<nav class="navbar navbar-expand-lg bg-light" style="--bs-bg-opacity: .85;" >
     <div class="container">
         <a class="navbar-brand" href="#">Administrador Parques</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

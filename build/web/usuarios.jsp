@@ -26,7 +26,7 @@
         <script src="assets/usuarios.js"></script>
         <script type="text/javascript" src="assets/logout.js"></script>
     </head>
-    <body>
+    <body class="masthead" style="background-image: url('assets/f2.png');">
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Pragma", "no-cache");
@@ -48,20 +48,21 @@
             }
             if (logeado) {
         %>
-        <main class="mt-5 mb-3">
+        <div class="container p-2">
+            <header>
+                <jsp:include page="WEB-INF/recursos/header.jsp">
+                    <jsp:param name="tipo" value="Administrador"/>
+                </jsp:include>
+            </header>
+            <br>
             <div class="container py-3 bg-light text-dark opacity-100" style="--bs-bg-opacity: .85;">
-                <header>
-                    <jsp:include page="WEB-INF/recursos/header.jsp">
-                        <jsp:param name="tipo" value="Administrador"/>
-                    </jsp:include>
-                </header>
 
                 <h4 align="center">USUARIOS</h4>
                 <br>&nbsp;
                 </button>&nbsp;&nbsp;
-                <button id="btnNuevo" class="btn btn-success"
+                <button id="btnNuevo" class="btn btn-outline-light border border-success shadow-lg p-3 rounded"
                         data-bs-toggle="modal" data-bs-target="#ModalAgregarUsuario" value="Agregar usuario">
-                    Agregar usuario
+                    <img src="assets/useradd.png"/>
                 </button>
                 <hr>
                 <div class="row">
@@ -72,7 +73,7 @@
                             <th>ID Empleado</th>
                             <th>ROL</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
+                            <th>ACCION</th>
                             </thead>
 
                             <tbody>
@@ -87,13 +88,13 @@
                                     <td><%=us.getEstado()%></td>
 
                                     <td>
-                                        <a class="btn btn-outline-dark " type="submit" href="javascript:cargar('<%=us.getUsername()%>','<%=us.getIdEmpleado()%>','<%=us.getRol()%>','<%=us.getEstado()%>')">Editar</a>
+                                        <a class="btn btn-outline-light border border-success shadow-lg rounded " type="submit" href="javascript:cargar('<%=us.getUsername()%>','<%=us.getIdEmpleado()%>','<%=us.getRol()%>','<%=us.getEstado()%>')"><img src="assets/editar.png"/></a>
                                         <% if (us.getEstado().equals("Activo")) {
                                         %>
-                                        <a class="btn btn-outline-dark " type="submit" href="javascript:desactivar('<%=us.getUsername()%>')">Desactivar</a>
+                                        <a class="btn btn-outline-light border border-success shadow-lg rounded " type="submit" href="javascript:desactivar('<%=us.getUsername()%>')"><img src="assets/apagar.png"/></a>
                                         <% } else {
                                         %>
-                                        <a class="btn btn-outline-dark " type="submit" href="javascript:activar('<%=us.getUsername()%>')">Activar</a>
+                                        <a class="btn btn-outline-light border border-success shadow-lg rounded" type="submit" href="javascript:activar('<%=us.getUsername()%>')"><img src="assets/encender.png"/></a>
                                         <%
                                             }
                                         %>
@@ -105,7 +106,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
         <%
             } else {
                 response.sendError(response.SC_PROXY_AUTHENTICATION_REQUIRED, "Credenciales Incorrectas");
@@ -152,7 +153,7 @@
                         </button>
                         <button type="submit" id="btnModificar" name="btnModificar" class="btn btn-outline-light"
                                 value="Modificar">
-                            <img src="assets/editar.png"/>
+                            <img src="assets/disquete.png"/>
                         </button>
                     </div>
                 </form>

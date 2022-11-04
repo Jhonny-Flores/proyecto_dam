@@ -20,7 +20,7 @@
         <script type="text/javascript" src="assets/logout.js"></script>
         <title>Incio</title>
     </head>
-    <body class="bg-primary p-2" style="--bs-bg-opacity: .25;");" >
+    <body class="masthead" style="background-image: url('assets/f3.png');">
         <div class="container" >
             <%
                 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");

@@ -27,7 +27,7 @@
         <script type="text/javascript" src="assets/parque.js"></script>
         <script type="text/javascript" src="assets/logout.js"></script>
     </head>
-    <body class="masthead" style="background-image: url('https://images2.alphacoders.com/894/894456.jpg');">
+    <body class="masthead" style="background-image: url('assets/f1.png');">
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Pragma", "no-cache");
@@ -49,29 +49,26 @@
             }
             if (logeado) {
         %>
-        <main class="mt-5 mb-3">
-            <div class="container py-3 bg-light text-dark opacity-100 " style="--bs-bg-opacity: .85;">
-
-
-                <div class="">
-                    <!-- -menu -->
-                    <header>
-                        <jsp:include page="WEB-INF/recursos/header.jsp">
-                            <jsp:param name="tipo" value="Administrador"/>
-                        </jsp:include>
-                    </header>
-
-
-                    <br>
-                    <h4 align="center">PARQUES</h4>
-                    <br>&nbsp;
-                    <button id="btnNuevo" class="btn btn-outline-light"
-                            data-bs-toggle="modal" data-bs-target="#exampleModal" value="Nuevo Registro ">
-                        <img src="assets/agregar-archivo.png"/>
-                    </button>
-                    <hr>
-                    <div class="row">
+        <div class="container p-2">
+            <header>
+                <jsp:include page="WEB-INF/recursos/header.jsp">
+                    <jsp:param name="tipo" value="Administrador"/>
+                </jsp:include>
+            </header>
+            <br>
+            <div class="container py-3 bg-light text-dark opacity-100" style="--bs-bg-opacity: .85;">
+                <br>
+                <h4 align="center">PARQUES</h4>
+                <br>&nbsp;
+                <button id="btnNuevo" class="btn btn-outline-light border border-danger shadow-lg p-3 rounded"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal" value="Nuevo Registro ">
+                    <img src="assets/addParque.png"/>
+                </button>
+                <hr>
+                <div class="row">
+                    <div class="col">
                         <table class="table-responsive table table-hover table-sm mt-4 " id="tabla">
+
                             <thead>
                             <th>ID</th>
                             <th>Nombre</th>
@@ -96,8 +93,7 @@
                                     <td><%=pa.getDireccion()%></td>
 
                                     <td>
-                                        <a class="btn btn-outline-light " type="submit" href="javascript:cargar(<%=pa.getIdParque()%>,'<%=pa.getNombre()%>','<%=pa.getPais()%>','<%=pa.getEstado()%>','<%=pa.getCiudad()%>','<%=pa.getDireccion()%>')"><img src="assets/editar.png"/></a>
-                                       <!-- <a class="btn btn-outline-light " type="submit" href="javascript:eliminar(<%=pa.getIdParque()%>)"><img src="assets/eliminar.png"/></a>-->
+                                        <a class="btn btn-outline-light border border-danger shadow-lg rounded" type="submit" href="javascript:cargar(<%=pa.getIdParque()%>,'<%=pa.getNombre()%>','<%=pa.getPais()%>','<%=pa.getEstado()%>','<%=pa.getCiudad()%>','<%=pa.getDireccion()%>')"><img src="assets/editar.png"/></a>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -106,12 +102,14 @@
                     </div>
                 </div>
             </div>
-        </main>              
+        </div>
+
         <%
             } else {
                 response.sendError(response.SC_PROXY_AUTHENTICATION_REQUIRED, "Credenciales Incorrectas");
             }
         %>
+
     </body>
 </html>
 

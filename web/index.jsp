@@ -20,7 +20,7 @@
         <script type="text/javascript" src="assets/login.js"></script>
     </head>
     <body>
-        <div class="masthead" style="background-image: url('https://images2.alphacoders.com/698/698367.jpg');">
+        <div class="masthead" style="background-image: url('https://images3.alphacoders.com/698/698366.jpg');">
             <div class="container">
                 <div class="d-flex align-items-center" style="min-height: 100vh">
                     <div class="box w-100">

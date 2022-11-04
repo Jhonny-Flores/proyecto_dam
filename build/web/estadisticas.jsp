@@ -20,7 +20,7 @@
         <script type="text/javascript" src="assets/logout.js"></script>
         <link rel="stylesheet" href="assets/graficos.css"/>
     </head>
-    <body>
+    <body class="masthead" style="background-image: url('assets/f3.png');">
         <%
             boolean logeado = false;
             Cookie[] cookies = request.getCookies();
@@ -44,8 +44,8 @@
                 <jsp:param name="tipo" value="Estadistica"/>
             </jsp:include>
         </header>
-        <main>
-            <div class="container">
+        <main class="mt-5 mb-3">
+            <div class="container  bg-light" style="--bs-bg-opacity: .90;" >
                 <h1>Estadisticas</h1>
                 <hr>
                 <h2>Graficos Generales</h2>

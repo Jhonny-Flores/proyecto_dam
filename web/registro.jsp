@@ -20,7 +20,7 @@
         <script type="text/javascript" src="assets/registro.js"></script>
         <script type="text/javascript" src="assets/logout.js"></script>
     </head>
-    <body>
+    <body class="masthead" style="background-image: url('assets/f3.png');">
         <%
             boolean logeado = false;
             Cookie[] cookies = request.getCookies();
@@ -45,7 +45,7 @@
             </jsp:include>
         </header>
         <main class="mt-5 mb-3">
-            <div class="container">
+            <div class="container bg-light" style="--bs-bg-opacity: .85;" >
                 <h1 class="text-center mx-auto">Formulario de Ingreso de Visitantes</h1>
                 <form class="row g-4 mt-2 shadow-lg mx-auto" id="frmRegistros" action="" method="post">
                     <div class="col-12 mx-auto">

@@ -30,7 +30,7 @@
 
         <style>
             body {
-                background-image: url('https://images2.alphacoders.com/894/894456.jpg');
+                background-image: url('assets/fparque.png');
                 background-repeat: no-repeat;
             }
             .container {
@@ -63,64 +63,70 @@
             if (logeado) {
         %>
 
-        <main class="mt-5 mb-3">
+        <div class="container p-2">
+            <header>
+                <jsp:include page="WEB-INF/recursos/header.jsp">
+                    <jsp:param name="tipo" value="Administrador"/>
+                </jsp:include>
+            </header>
+            <br>
             <div class="container py-3 bg-light text-dark opacity-100" style="--bs-bg-opacity: .85;">
-                <header>
-                    <jsp:include page="WEB-INF/recursos/header.jsp">
-                        <jsp:param name="tipo" value="Administrador"/>
-                    </jsp:include>
-                </header>
+
 
                 <h4 align="center">EMPLEADOS</h4>
                 <br>&nbsp;
-                <button id="btnNuevo" class="btn btn-success"
+                <button id="btnNuevo" class="btn btn-outline-light border border-primary shadow-lg p-3 rounded"
                         data-bs-toggle="modal" data-bs-target="#ModalAgregarEmpleado" value="Agregar empleado">
-                    Agregar empleado
+                    <img src="assets/cv.png"/>
                 </button>&nbsp;&nbsp;
                 <hr>
                 <div class="row">
-                    <table class="table table-responsive table-hover table-sm mt-4 " id="tabla">
-                        <thead>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Edad</th>
-                        <th>Teléfono</th>
-                        <th>Direccion</th>
-                        <th>Parque</th>
-                        <th>ACCION</th>
-                        </thead>
+                    <div class="col">
+                        <table class="table table-responsive table-hover table-sm mt-4 " id="tabla">
+                            <thead>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Teléfono</th>
+                            <th>Direccion</th>
+                            <th>Parque</th>
+                            <th>ACCION</th>
+                            </thead>
 
-                        <tbody>
-                            <%
-                                List<Empleado> listaParque = daoEmpleado.getAllEmpleados();
-                                for (Empleado emp : listaParque) {
-                            %>
-                            <tr>
-                                <td><%=emp.getIdEmpleado()%></td>
-                                <td><%=emp.getNombre()%></td>
-                                <td><%=emp.getApellido()%></td>
-                                <td><%=emp.getEdad()%></td>
-                                <td><%=emp.getTelefono()%></td>
-                                <td><%=emp.getDireccion()%></td>
-                                <td><%=emp.getIdParque()%></td>
+                            <tbody>
+                                <%
+                                    List<Empleado> listaParque = daoEmpleado.getAllEmpleados();
+                                    for (Empleado emp : listaParque) {
+                                %>
+                                <tr>
+                                    <td><%=emp.getIdEmpleado()%></td>
+                                    <td><%=emp.getNombre()%></td>
+                                    <td><%=emp.getApellido()%></td>
+                                    <td><%=emp.getEdad()%></td>
+                                    <td><%=emp.getTelefono()%></td>
+                                    <td><%=emp.getDireccion()%></td>
+                                    <td><%=emp.getIdParque()%></td>
 
-                                <td>
-                                    <a class="btn btn-outline-light " type="submit" href="javascript:cargar(<%=emp.getIdEmpleado()%>,'<%=emp.getNombre()%>','<%=emp.getApellido()%>','<%=emp.getEdad()%>','<%=emp.getTelefono()%>','<%=emp.getDireccion()%>','<%=emp.getIdParque()%>')"><img src="assets/editar-usuario.png"/></a>
-                                    <a class="btn btn-outline-light " type="submit" href="javascript:eliminar(<%=emp.getIdEmpleado()%>)"><img src="assets/eliminar-usuario.png"/></a>
-                                </td>
-                            </tr>
-                            <%}%>
-                        </tbody>
-                    </table>
+                                    <td>
+                                        <a class="btn btn-outline-light border border-primary shadow-lg rounded" type="submit" href="javascript:cargar(<%=emp.getIdEmpleado()%>,'<%=emp.getNombre()%>','<%=emp.getApellido()%>','<%=emp.getEdad()%>','<%=emp.getTelefono()%>','<%=emp.getDireccion()%>','<%=emp.getIdParque()%>')"><img src="assets/editar.png"/></a>
+                                        <a class="btn btn-outline-light border border-primary shadow-lg rounded" type="submit" href="javascript:eliminar(<%=emp.getIdEmpleado()%>)"><img src="assets/eliminar-usuario.png"/></a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </main>
+        </div>
+
         <%
             } else {
                 response.sendError(response.SC_PROXY_AUTHENTICATION_REQUIRED, "Credenciales Incorrectas");
             }
         %>
+
     </body>
 </html>
 
@@ -131,32 +137,32 @@
                 <h5 class="modal-title text-center" id="ModalModificarEmpleadoLabel">Modificar empleados</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-                <form id="frmEmpleadoModificar" >
+            <form id="frmEmpleadoModificar" >
                 <div class="modal-body">
                     <label class="form-label" for="txtIdEmpleado1">Id Empleado</label>
                     <input type="number" id="txtIdEmpleado1" name="idEmpleado"
                            placeholder="ID Empleado" required class="form-control" readonly="" disabled=""><br>
-                    
+
                     <label class="form-label" for="txtNombre1">Nombre Empleado</label>
                     <input type="text" id="txtNombre1" name="txtNombre1"
                            placeholder="Nombre del empleado" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtApellido1">Apellido Empleado</label>
                     <input type="text" id="txtApellido1" name="txtApellido1"
                            placeholder="Apellido" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtEdad1">Edad Empleado</label>
                     <input type="number" min="0" max="120" title="Ingrese una edad" id="txtEdad1" name="txtEdad1"
                            placeholder="Edad" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtTelefono1">Teléfono</label>
                     <input type="text" id="txtTelefono1" pattern="[0-9]{4}-[0-9]{4}" name="txtTelefono1"
                            placeholder="Teléfono" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtDireccion1">Direccion Empleado</label>
                     <input type="text" id="txtDireccion1" name="txtDireccion1"
                            placeholder="Direccion" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="selectParque1">Parque Empleado</label>
                     <select id="selectParque1" class="form-select slParks" name="selectParque1" required="">
                         <option value="" selected>Seleccione Parque</option>
@@ -188,23 +194,23 @@
                     <label class="form-label" for="txtNombre">Nombre Empleado</label>
                     <input type="text" id="txtNombre" name="txtNombre"
                            placeholder="Nombre del empleado" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtApellido">Apellido Empleado</label>
                     <input type="text" id="txtApellido" name="txtApellido"
                            placeholder="Apellido" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtEdad">Edad Empleado</label>
                     <input type="number" min="0" max="120" title="Ingrese una edad" id="txtEdad" name="txtEdad"
                            placeholder="Edad" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtTelefono">Teléfono Empleado</label>
                     <input type="text" id="txtTelefono" pattern="[0-9]{4}-[0-9]{4}" name="txtTelefono"
                            placeholder="Teléfono" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="txtDireccion">Direccion Empleado</label>
                     <input type="text" id="txtDireccion" name="txtDireccion"
                            placeholder="Direccion" required class="form-control"><br>
-                    
+
                     <label class="form-label" for="selectParque">Parque Empleado</label>
                     <select id="selectParque" class="form-select slParks" name="selectParque" required="">
                         <option value="" selected>Seleccione Parque</option>
