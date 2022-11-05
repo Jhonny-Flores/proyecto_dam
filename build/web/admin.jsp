@@ -54,13 +54,13 @@
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://images7.alphacoders.com/897/897920.jpg" class="d-block w-100" alt="...">
+                        <img src="https://images7.alphacoders.com/897/897920.jpg" class="d-flex w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://images2.alphacoders.com/698/698367.jpg" class="d-block w-100" alt="...">
+                        <img src="https://images2.alphacoders.com/698/698367.jpg" class="d-flex w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://images.alphacoders.com/219/219371.jpg" class="d-block w-100" alt="...">
+                        <img src="https://images.alphacoders.com/219/219371.jpg" class="d-flex w-100" alt="...">
                     </div>
                 </div>
             </div>
