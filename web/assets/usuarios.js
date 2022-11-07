@@ -121,6 +121,10 @@ function cargarSelectEmpleados() {
 $(document).ready(function () {
 
     cargarSelectEmpleados();
+    
+    $('#btnNuevo').click(function() {
+        $('#frmAgregarUsuario')[0].reset();
+    });
 
     $('#frmAgregarUsuario').submit(e => {
         e.preventDefault();

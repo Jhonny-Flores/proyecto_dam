@@ -74,6 +74,10 @@ function cargarSelectParque() {
 $(document).ready(function () {
 
     cargarSelectParque();
+    
+    $('#btnNuevo').click(function() {
+        $('#frmEmpleadoAgregar')[0].reset();
+    });
 
     $('#frmEmpleadoAgregar').submit(e => {
         e.preventDefault();

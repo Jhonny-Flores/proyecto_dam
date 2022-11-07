@@ -200,15 +200,23 @@ async function getVisitorsSum(parqueA, fecha1A, fecha2A) {
                         borderWidth: 4,
                         pointBackgroundColor: '#2596be'
                     }]
+            }, options: {
+                scales: {
+                    xAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                }
             }
         };
         var chart = new Chart(ctx, config);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Oops...',
-            text: `El servidor dice: ${error.statusText}`
+            text: `${error.statusText}`
         });
     });
 }
@@ -253,15 +261,23 @@ async function getVisitorsPerDay(parqueA, fecha1A) {
                         ],
                         borderWidth: 1
                     }]
+            }, options: {
+                scales: {
+                    xAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                }
             }
         };
         var chart2 = new Chart(ctx2, config2);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Oops...',
-            text: `El servidor dice: ${error.statusText}`
+            text: `${error.statusText}`
         });
     });
 }

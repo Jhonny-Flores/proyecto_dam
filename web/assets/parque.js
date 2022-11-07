@@ -15,6 +15,10 @@ async function cargar(idParque, nombre, pais, estado, ciudad, direccion) {
 
 
 $(document).ready(function () {
+    
+    $('#btnNuevo').click(function() {
+        $('#form1')[0].reset();
+    });
 
     $('#form1').submit(e => {
         e.preventDefault();
@@ -36,7 +40,7 @@ $(document).ready(function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tardeFFFFFFFF',
+                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tarde',
             })
         })
     })
@@ -61,7 +65,7 @@ $(document).ready(function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tardeFFFFFFFF',
+                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tarde',
             })
         })
     })
