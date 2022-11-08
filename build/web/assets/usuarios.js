@@ -97,10 +97,10 @@ function cargarSelectEmpleados() {
     }).done((resp) => {
         if (resp === null) {
             /*Swal.fire({
-                icon: 'warning',
-                title: 'Advertencia',
-                text: 'No hay empleados sin cuenta'
-            })*/
+             icon: 'warning',
+             title: 'Advertencia',
+             text: 'No hay empleados sin cuenta'
+             })*/
             console.log("No Disponibles");
         } else {
             console.log(resp);
@@ -121,8 +121,8 @@ function cargarSelectEmpleados() {
 $(document).ready(function () {
 
     cargarSelectEmpleados();
-    
-    $('#btnNuevo').click(function() {
+
+    $('#btnNuevo').click(function () {
         $('#frmAgregarUsuario')[0].reset();
     });
 
@@ -153,26 +153,37 @@ $(document).ready(function () {
 
     $('#frmEditarUsuario').submit(e => {
         e.preventDefault();
-        $.ajax({
-            url: 'UsuarioController',
-            type: 'POST',
-            data: {method: "UpdateUser", username: $('#txtUsername1').val(), password: $('#txtPasswordUpdate').val(), rol: $('#selectRol1').val()}
-        }).done((resp) => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Guardado Correctamente',
-                text: 'La informacion ha sido guardada correctamente'
-            }).then(function () {
-                $('#frmAgregarUsuario')[0].reset();
-                location.reload();
-            });
-        }).fail((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tarde',
-            });
-        });
+        Swal.fire({
+            icon: 'question',
+            title: 'Confirmacion',
+            text: "Esta a punto de modificar a un usuario, esta accion es irreversible",
+            showDenyButton: true,
+            confirmButtonText: 'Modificar',
+            denyButtonText: `Cancelar`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await $.ajax({
+                    url: 'UsuarioController',
+                    type: 'POST',
+                    data: {method: "UpdateUser", username: $('#txtUsername1').val(), password: $('#txtPasswordUpdate').val(), rol: $('#selectRol1').val()}
+                }).done((resp) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Guardado Correctamente',
+                        text: 'La informacion ha sido guardada correctamente'
+                    }).then(function () {
+                        $('#frmAgregarUsuario')[0].reset();
+                        location.reload();
+                    });
+                }).fail((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ocurrio un error inesperado, intentalo de nuevo mas tarde',
+                    });
+                });
+            }
+        })
     });
 
     $("#switchPassword").on('change', e => {

@@ -28,7 +28,7 @@ $(document).ready(function () {
                     } else if(resp.rol === "Estadistica") {
                         window.location.replace("estadisticas.jsp");
                     } else if(resp.rol === "Reporte") {
-                        window.location.replace("reporte.jsp");
+                        window.location.replace("reportes.jsp");
                     }
                 });
             }

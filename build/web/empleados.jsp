@@ -21,6 +21,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registro de empleados</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+        <link rel="manifest" href="assets/favicon/site.webmanifest">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -145,11 +149,11 @@
 
                     <label class="form-label" for="txtNombre1">Nombre Empleado</label>
                     <input type="text" id="txtNombre1" name="txtNombre1"
-                           placeholder="Nombre del empleado" required class="form-control"><br>
+                           placeholder="Nombre del empleado" required minlength="2" maxlength="100" class="form-control"><br>
 
                     <label class="form-label" for="txtApellido1">Apellido Empleado</label>
                     <input type="text" id="txtApellido1" name="txtApellido1"
-                           placeholder="Apellido" required class="form-control"><br>
+                           placeholder="Apellido" required minlength="2" maxlength="100" class="form-control"><br>
 
                     <label class="form-label" for="txtEdad1">Edad Empleado</label>
                     <input type="number" min="0" max="120" title="Ingrese una edad" id="txtEdad1" name="txtEdad1"
@@ -157,11 +161,11 @@
 
                     <label class="form-label" for="txtTelefono1">Teléfono</label>
                     <input type="text" id="txtTelefono1" pattern="[0-9]{4}-[0-9]{4}" name="txtTelefono1"
-                           placeholder="Teléfono" required class="form-control"><br>
+                           placeholder="XXXX-XXXX" required class="form-control"><br>
 
                     <label class="form-label" for="txtDireccion1">Direccion Empleado</label>
                     <input type="text" id="txtDireccion1" name="txtDireccion1"
-                           placeholder="Direccion" required class="form-control"><br>
+                           placeholder="Direccion" required minlength="5" maxlength="200" class="form-control"><br>
 
                     <label class="form-label" for="selectParque1">Parque Empleado</label>
                     <select id="selectParque1" class="form-select slParks" name="selectParque1" required="">
@@ -193,11 +197,11 @@
                 <div class="modal-body">
                     <label class="form-label" for="txtNombre">Nombre Empleado</label>
                     <input type="text" id="txtNombre" name="txtNombre"
-                           placeholder="Nombre del empleado" required class="form-control"><br>
+                           placeholder="Nombre del empleado" required minlength="2" maxlength="100" class="form-control"><br>
 
                     <label class="form-label" for="txtApellido">Apellido Empleado</label>
                     <input type="text" id="txtApellido" name="txtApellido"
-                           placeholder="Apellido" required class="form-control"><br>
+                           placeholder="Apellido" required minlength="2" maxlength="100" class="form-control"><br>
 
                     <label class="form-label" for="txtEdad">Edad Empleado</label>
                     <input type="number" min="0" max="120" title="Ingrese una edad" id="txtEdad" name="txtEdad"
@@ -205,11 +209,11 @@
 
                     <label class="form-label" for="txtTelefono">Teléfono Empleado</label>
                     <input type="text" id="txtTelefono" pattern="[0-9]{4}-[0-9]{4}" name="txtTelefono"
-                           placeholder="Teléfono" required class="form-control"><br>
+                           placeholder="XXXX-XXXX" required class="form-control"><br>
 
                     <label class="form-label" for="txtDireccion">Direccion Empleado</label>
                     <input type="text" id="txtDireccion" name="txtDireccion"
-                           placeholder="Direccion" required class="form-control"><br>
+                           placeholder="Direccion" required minlength="5" maxlength="200" class="form-control"><br>
 
                     <label class="form-label" for="selectParque">Parque Empleado</label>
                     <select id="selectParque" class="form-select slParks" name="selectParque" required="">

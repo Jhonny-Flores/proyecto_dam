@@ -74,8 +74,8 @@ function cargarSelectParque() {
 $(document).ready(function () {
 
     cargarSelectParque();
-    
-    $('#btnNuevo').click(function() {
+
+    $('#btnNuevo').click(function () {
         $('#frmEmpleadoAgregar')[0].reset();
     });
 
@@ -103,30 +103,41 @@ $(document).ready(function () {
             });
         });
     });
-    
+
     $('#frmEmpleadoModificar').submit(e => {
         e.preventDefault();
-        $.ajax({
-            url: 'EmpleadoController',
-            type: 'POST',
-            data: {method: "ModificarEmpleado", nombre1: $('#txtNombre1').val(), apellido1: $('#txtApellido1').val(), edad1: $('#txtEdad1').val(),
-                telefono1: $('#txtTelefono1').val(), direccion1: $('#txtDireccion1').val(), idParque1: $('#selectParque1').val(),
-                idEmpleado1: $('#txtIdEmpleado1').val()}
-        }).done((resp) => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Actualizado Correctamente',
-                text: 'La informacion ha sido guardada correctamente'
-            }).then(function () {
-                $('#frmEmpleadoModificar')[0].reset();
-                location.reload();
-            });
-        }).fail((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tardeFFFFFFFF',
-            });
-        });
+        Swal.fire({
+            icon: 'question',
+            title: 'Confirmacion',
+            text: "Esta a punto de modificar a un empleado, esta accion es irreversible",
+            showDenyButton: true,
+            confirmButtonText: 'Modificar',
+            denyButtonText: `Cancelar`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await $.ajax({
+                    url: 'EmpleadoController',
+                    type: 'POST',
+                    data: {method: "ModificarEmpleado", nombre1: $('#txtNombre1').val(), apellido1: $('#txtApellido1').val(), edad1: $('#txtEdad1').val(),
+                        telefono1: $('#txtTelefono1').val(), direccion1: $('#txtDireccion1').val(), idParque1: $('#selectParque1').val(),
+                        idEmpleado1: $('#txtIdEmpleado1').val()}
+                }).done((resp) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Actualizado Correctamente',
+                        text: 'La informacion ha sido guardada correctamente'
+                    }).then(function () {
+                        $('#frmEmpleadoModificar')[0].reset();
+                        location.reload();
+                    });
+                }).fail((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ocurrio un error inesperado, intentalo de nuevo mas tardeFFFFFFFF',
+                    });
+                });
+            }
+        })
     });
 });

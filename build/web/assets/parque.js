@@ -15,8 +15,8 @@ async function cargar(idParque, nombre, pais, estado, ciudad, direccion) {
 
 
 $(document).ready(function () {
-    
-    $('#btnNuevo').click(function() {
+
+    $('#btnNuevo').click(function () {
         $('#form1')[0].reset();
     });
 
@@ -44,32 +44,43 @@ $(document).ready(function () {
             })
         })
     })
-    
+
     $('#form2').submit(e => {
         e.preventDefault();
-        $.ajax({
-            url: 'ParqueController',
-            type: 'POST',
-            data: {method: "ModificarParque", nombre1: $('#txtNombre1').val(), pais1: $('#txtPais1').val(), estado1: $('#txtEstado1').val(),
-                ciudad1: $('#txtCiudad1').val(), direccion1: $('#txtDireccion1').val(), id1:$('#txtID').val()}
-        }).done((resp) => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Guardado Correctamente',
-                text: `La informacion ha sido guardada correctamente`
-            }).then(function () {
-                $('#form1')[0].reset();
-                location.reload();
-            })
-        }).fail((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ocurrio un error inesperado, intentalo de nuevo mas tarde',
-            })
-        })
-    })
-    
-    
-    
+        Swal.fire({
+            icon: 'question',
+            title: 'Confirmacion',
+            text: "Esta a punto de modificar a un parque, esta accion es irreversible",
+            showDenyButton: true,
+            confirmButtonText: 'Modificar',
+            denyButtonText: `Cancelar`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'ParqueController',
+                    type: 'POST',
+                    data: {method: "ModificarParque", nombre1: $('#txtNombre1').val(), pais1: $('#txtPais1').val(), estado1: $('#txtEstado1').val(),
+                        ciudad1: $('#txtCiudad1').val(), direccion1: $('#txtDireccion1').val(), id1: $('#txtID').val()}
+                }).done((resp) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Guardado Correctamente',
+                        text: `La informacion ha sido guardada correctamente`
+                    }).then(function () {
+                        $('#form1')[0].reset();
+                        location.reload();
+                    })
+                }).fail((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ocurrio un error inesperado, intentalo de nuevo mas tarde',
+                    });
+                });
+            }
+        });
+    });
+
+
+
 });
