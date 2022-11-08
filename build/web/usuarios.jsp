@@ -95,10 +95,10 @@
                                         <a class="btn btn-outline-light border border-success shadow-lg rounded " type="submit" href="javascript:cargar('<%=us.getUsername()%>','<%=us.getIdEmpleado()%>','<%=us.getRol()%>','<%=us.getEstado()%>')"><img src="assets/editar.png"/></a>
                                         <% if (us.getEstado().equals("Activo")) {
                                         %>
-                                        <a class="btn btn-outline-light border border-success shadow-lg rounded " type="submit" href="javascript:desactivar('<%=us.getUsername()%>')"><img src="assets/apagar.png"/></a>
+                                        <a class="btn btn-outline-light border border-success shadow-lg rounded " type="submit" href="javascript:desactivar('<%=us.getUsername()%>')"><img src="assets/encender.png"/></a>
                                         <% } else {
                                         %>
-                                        <a class="btn btn-outline-light border border-success shadow-lg rounded" type="submit" href="javascript:activar('<%=us.getUsername()%>')"><img src="assets/encender.png"/></a>
+                                        <a class="btn btn-outline-light border border-success shadow-lg rounded" type="submit" href="javascript:activar('<%=us.getUsername()%>')"><img src="assets/apagar.png"/></a>
                                         <%
                                             }
                                         %>

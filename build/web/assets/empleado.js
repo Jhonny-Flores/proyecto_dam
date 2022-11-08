@@ -41,9 +41,9 @@ async function eliminar(id) {
                 }
             }).fail(function () {
                 Swal.fire({
-                    icon: 'error',
+                    icon: 'warning',
                     title: 'Oops...',
-                    text: 'Error al Cargar el Select',
+                    text: 'Este empleado contiene registros ingresados, se recomienda desactivar el usuario',
                 });
             });
         } else if (result.isDenied) {

@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Geovanny Martinez(034519)
  */
+@WebServlet(name = "DetalleRegistroController", urlPatterns = "/DetalleRegistroController")
 public class DetalleRegistroController extends HttpServlet {
 
     private DetalleRegistroDAO detalleRegistroDao;

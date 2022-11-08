@@ -16,9 +16,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +34,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
  *
  * @author Geovanny Martinez(034519)
  */
+@WebServlet(name = "RegistroController", urlPatterns = "/RegistroController")
 public class RegistroController extends HttpServlet {
 
     private RegistroDAO registroDAO;
@@ -84,45 +84,46 @@ public class RegistroController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        try {
-            this.registroDAO = new RegistroDAO();
-            Gson gsonConverter = new Gson();
-            switch (request.getParameter("method")) {
-                case "addRegister":
-                    PrintWriter out = response.getWriter();
-                    Registro register = new Registro();
-                    String fechaCreacion = request.getParameter("fechaCreacion");
-                    int idParque = Integer.parseInt(request.getParameter("idParque"));
-                    LocalDate date = LocalDate.parse(fechaCreacion);
-                    boolean existe = this.registroDAO.checkDate(Date.valueOf(date), idParque);
-                    if (existe) {
-                        out.print(gsonConverter.toJson(null));
-                        response.sendError(500, "La fecha Ingresada ya posee un registro, solo es posible agregar un registro por dia por parque");
-                    } else {
-                        register.setIdParque(idParque);
-                        register.setUsuarioCreador(request.getParameter("usuarioCreador"));
-                        register.setFechaCreacion(Date.valueOf(date));
-                        int newRegister = this.registroDAO.addRegistro(register);
-                        if (newRegister != -1) {
-                            out.print(gsonConverter.toJson(String.format("{\"idRegister\": %s}", newRegister)));
-                        } else {
+            try {
+                this.registroDAO = new RegistroDAO();
+                Gson gsonConverter = new Gson();
+                switch (request.getParameter("method")) {
+                    case "addRegister":
+                        PrintWriter out = response.getWriter();
+                        Registro register = new Registro();
+                        String fechaCreacion = request.getParameter("fechaCreacion");
+                        int idParque = Integer.parseInt(request.getParameter("idParque"));
+                        LocalDate date = LocalDate.parse(fechaCreacion);
+                        boolean existe = this.registroDAO.checkDate(Date.valueOf(date), idParque);
+                        if (existe) {
                             out.print(gsonConverter.toJson(null));
+                            response.sendError(500, "La fecha Ingresada ya posee un registro, solo es posible agregar un registro por dia por parque");
+                        } else {
+                            register.setIdParque(idParque);
+                            register.setUsuarioCreador(request.getParameter("usuarioCreador"));
+                            register.setFechaCreacion(Date.valueOf(date));
+                            int newRegister = this.registroDAO.addRegistro(register);
+                            if (newRegister != -1) {
+                                out.print(gsonConverter.toJson(String.format("{\"idRegister\": %s}", newRegister)));
+                            } else {
+                                out.print(gsonConverter.toJson(null));
+                            }
                         }
-                    }
+                        break;
 
-                case "getReporte":
-                    Date fecha = Date.valueOf(request.getParameter("fecha"));
-                    generarReporte(response, fecha);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Ocurrio un error");
-            response.sendError(500, e.getMessage());
-        } catch (JRException ex) {
-            Logger.getLogger(RegistroController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                    case "getReporte":
+                        System.out.println("Entro");
+                        String fechaReporte = request.getParameter("fecha");
+                        LocalDate dateReport = LocalDate.parse(fechaReporte);
+                        generarReporte(response, Date.valueOf(dateReport));
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            } catch (ClassNotFoundException | SQLException e) {
+                System.out.println("Ocurrio un error");
+                response.sendError(500, e.getMessage());
+            } 
     }
 
     /**
@@ -135,7 +136,7 @@ public class RegistroController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void generarReporte(HttpServletResponse response, Date fecha) throws IOException, JRException {
+    public void generarReporte(HttpServletResponse response, Date fecha) throws IOException {
         try {
             InputStream reporte = this.getServletConfig().getServletContext().getResourceAsStream("/reportes/reporteDetalles.jasper");
             if (reporte != null) {
@@ -144,7 +145,7 @@ public class RegistroController extends HttpServlet {
                 mapDs.put("fecha", fecha);
                 response.setContentType("application/pdf");
                 response.addHeader("Content-disposition", "inline; filename=ReporteDetalles.pdf");
-                JasperPrint jasperPrint = JasperFillManager.fillReport(reporteJasper, mapDs, Conexion.getInstance().getConnection());
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reporteJasper, mapDs,Conexion.getInstance().getConnection());
                 JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
             } else {
                 response.sendError(400, "No se encontro el reporte");
@@ -154,5 +155,4 @@ public class RegistroController extends HttpServlet {
         }
 
     }
-
 }
