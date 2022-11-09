@@ -17,9 +17,9 @@ public class Conexion {
 
     private static Conexion instance;
     private Connection connection;
-    private final String URL = "jdbc:mysql://localhost:3306/dbparques";
-    private final String USERNAME = "admin";
-    private final String PASSWORD = "contrasenaVergas";
+    private final String URL = "jdbc:mysql://141.148.161.172:3306/dbparques";
+    private final String USERNAME = "test";
+    private final String PASSWORD = "password";
     private final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     private Conexion() throws SQLException, ClassNotFoundException {

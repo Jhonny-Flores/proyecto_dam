@@ -30,7 +30,7 @@ public class DetalleRegistroDAO {
 
     public int addDetallesRegistro(List<DetalleRegistro> detalles) throws SQLException {
         conexion.getConnection().setAutoCommit(false);
-        String query = "insert into DetalleRegistro (idRegistro,idClasificacion,totalVisitantes) values (?,?,?)";
+        String query = "insert into detalleregistro (idRegistro,idClasificacion,totalVisitantes) values (?,?,?)";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             Iterator<DetalleRegistro> it = detalles.iterator();
@@ -62,7 +62,7 @@ public class DetalleRegistroDAO {
 
     public List<Estadistica> getVisitorsSum(int idParque, Date fecha1, Date fecha2) throws SQLException {
         List<Estadistica> visitantesParque = new ArrayList<>();
-        String query = "select r.fechaCreacion, sum(dr.totalVisitantes) from DetalleRegistro dr inner join registro r on dr.idRegistro = r.idRegistro "
+        String query = "select r.fechaCreacion, sum(dr.totalVisitantes) from detalleregistro dr inner join registro r on dr.idRegistro = r.idRegistro "
                 + "where r.idParque = ? and (r.fechaCreacion between ? and ?) group by dr.idRegistro order by r.fechaCreacion;";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
@@ -82,7 +82,7 @@ public class DetalleRegistroDAO {
 
     public List<Estadistica> getVisitorsPerDay(int idParque, Date fecha1) throws SQLException {
         List<Estadistica> visitantesParque = new ArrayList<>();
-        String query = "select c.nombre, dr.totalVisitantes from DetalleRegistro dr inner join registro r on dr.idRegistro = r.idRegistro "
+        String query = "select c.nombre, dr.totalVisitantes from detalleregistro dr inner join registro r on dr.idRegistro = r.idRegistro "
                 + "inner join clasificacion c on dr.idClasificacion = c.idClasificacion "
                 + "where r.idParque = ? and r.fechaCreacion = ? group by dr.idClasificacion;";
         try {
@@ -102,7 +102,7 @@ public class DetalleRegistroDAO {
 
     public List<Estadistica> getVisitorsPerAgeAll() throws SQLException {
         List<Estadistica> visitantesParque = new ArrayList<>();
-        String query = "select c.nombre, sum(dr.totalVisitantes) from DetalleRegistro dr inner join registro r on dr.idRegistro = r.idRegistro "
+        String query = "select c.nombre, sum(dr.totalVisitantes) from detalleregistro dr inner join registro r on dr.idRegistro = r.idRegistro "
                 + "inner join clasificacion c on dr.idClasificacion = c.idClasificacion group by dr.idClasificacion;";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
@@ -118,7 +118,7 @@ public class DetalleRegistroDAO {
     }
     public List<Estadistica> sumByPark() throws SQLException {
         List<Estadistica> visitantesParque = new ArrayList<>();
-        String query = "select p.nombre, sum(dr.totalVisitantes) from DetalleRegistro dr inner join registro r on dr.idRegistro = r.idRegistro " +
+        String query = "select p.nombre, sum(dr.totalVisitantes) from detalleregistro dr inner join registro r on dr.idRegistro = r.idRegistro " +
                        "inner join parque p on r.idParque = p.idParque group by r.idParque;";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
@@ -135,7 +135,7 @@ public class DetalleRegistroDAO {
     
     public List<Estadistica> sumByDayAllDays() throws SQLException {
         List<Estadistica> visitantesParque = new ArrayList<>();
-        String query = "select r.fechaCreacion, sum(dr.totalVisitantes) from DetalleRegistro dr inner join registro r on dr.idRegistro = r.idRegistro "
+        String query = "select r.fechaCreacion, sum(dr.totalVisitantes) from detalleregistro dr inner join registro r on dr.idRegistro = r.idRegistro "
                 + "group by r.fechaCreacion order by r.fechaCreacion;";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
@@ -152,7 +152,7 @@ public class DetalleRegistroDAO {
 
     public List<DetalleRegistro> getAllDetallesRegistros() throws SQLException {
         List<DetalleRegistro> allDetallesRegistros = new ArrayList<>();
-        String query = "select * from DetalleRegistro";
+        String query = "select * from detalleregistro";
         try {
             Statement st = conexion.getConnection().createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -173,7 +173,7 @@ public class DetalleRegistroDAO {
 
     public List<DetalleRegistro> getAllDetallesRegistrosByIdRegistro(int id) throws SQLException {
         List<DetalleRegistro> allDetallesRegistros = new ArrayList<>();
-        String query = "select * from DetalleRegistro where idRegistro=?";
+        String query = "select * from detalleregistro where idRegistro=?";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             psmt.setInt(1, id);
@@ -194,7 +194,7 @@ public class DetalleRegistroDAO {
 
     public List<DetalleRegistro> getAllDetallesRegistrosByIdClasificacion(int id) throws SQLException {
         List<DetalleRegistro> allDetallesRegistros = new ArrayList<>();
-        String query = "select * from DetalleRegistro where idClasificacion=?";
+        String query = "select * from detalleregistro where idClasificacion=?";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             psmt.setInt(1, id);
@@ -215,7 +215,7 @@ public class DetalleRegistroDAO {
 
     public List<DetalleRegistro> getAllDetallesRegistrosByRegistroAndClasificacion(int idCla, int idRe) throws SQLException {
         List<DetalleRegistro> allDetallesRegistros = new ArrayList<>();
-        String query = "select * from DetalleRegistro where idClasificacion=? and idRegistro=?";
+        String query = "select * from detalleregistro where idClasificacion=? and idRegistro=?";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             psmt.setInt(1, idCla);
@@ -236,7 +236,7 @@ public class DetalleRegistroDAO {
     }
 
     public int deleteDetalleRegistro(int id) throws SQLException {
-        String query = "delete from DetalleRegistro where idDetalle=?";
+        String query = "delete from detalleregistro where idDetalle=?";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             psmt.setInt(1, id);
@@ -247,7 +247,7 @@ public class DetalleRegistroDAO {
     }
 
     public int updateDetalleRegistro(DetalleRegistro detail) throws SQLException {
-        String query = "update DetalleRegistro set idRegistro=?,idClasificacion=1,totalVisitantes=? where idDetalle=?";
+        String query = "update detalleregistro set idRegistro=?,idClasificacion=1,totalVisitantes=? where idDetalle=?";
         try {
             PreparedStatement psmt = conexion.getConnection().prepareStatement(query);
             psmt.setInt(1, detail.getIdRegistro());

@@ -12,6 +12,14 @@
         <servlet-name>EmpleadoController</servlet-name>
         <servlet-class>com.controller.EmpleadoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsuarioController</servlet-name>
+        <servlet-class>com.controller.UsuarioController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ParqueController</servlet-name>
+        <servlet-class>com.controller.ParqueController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DetalleRegistroController</servlet-name>
         <url-pattern>/DetalleRegistroController</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>EmpleadoController</servlet-name>
         <url-pattern>/EmpleadoController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioController</servlet-name>
+        <url-pattern>/UsuarioController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ParqueController</servlet-name>
+        <url-pattern>/ParqueController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

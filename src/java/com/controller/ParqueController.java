@@ -5,20 +5,15 @@
 package com.controller;
 
 import com.dao.ParqueDAO;
-import com.dao.UsuarioDAO;
 import com.google.gson.Gson;
 import com.models.Parque;
-import com.models.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

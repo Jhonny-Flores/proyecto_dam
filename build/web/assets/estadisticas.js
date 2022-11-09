@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+var chart1;
+var chart2;
+var chart3;
+var chart4;
+var chart5;
+
 async function sumAllDays() {
     feather.replace({'aria-hidden': 'true'});
     await $.ajax({
@@ -10,14 +16,14 @@ async function sumAllDays() {
         type: 'POST',
         data: {method: "sumAllDays"}
     }).done((resp) => {
-        const ctx = document.getElementById('sumAllDaysGraphs');
+        const ctx1 = document.getElementById('sumAllDaysGraphs');
         var fechaCreacion = resp.map(function (e) {
             return e.fechaCreacion;
         });
         var data = resp.map(function (e) {
             return e.totalVisitantes;
         });
-        var config = {
+        var config1 = {
             type: 'line',
             data: {
                 labels: fechaCreacion,
@@ -35,7 +41,10 @@ async function sumAllDays() {
                     }]
             }
         };
-        var chart = new Chart(ctx, config);
+        if (chart1) {
+            chart1.destroy();
+        }
+        chart1 = new Chart(ctx1, config1);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({
@@ -54,14 +63,14 @@ async function graficoBarras() {
         data: {method: "sumByPark"}
     }).done((resp) => {
         console.log(resp);
-        const ctx = document.getElementById('allVisitorsSumPerPark');
+        const ctx2 = document.getElementById('allVisitorsSumPerPark');
         var nombreParque = resp.map(function (e) {
             return e.nombreCategoria;
         });
         var data = resp.map(function (e) {
             return e.totalVisitantes;
         });
-        var config = {
+        var config2 = {
             type: 'horizontalBar',
             data: {
                 labels: nombreParque,
@@ -104,7 +113,10 @@ async function graficoBarras() {
                 }
             }
         };
-        var chart = new Chart(ctx, config);
+        if (chart2) {
+            chart2.destroy();
+        }
+        chart2 = new Chart(ctx2, config2);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({
@@ -122,14 +134,14 @@ async function getVisitorsPerAgeAll() {
         type: 'POST',
         data: {method: "getVisitorsPerAgeAll"}
     }).done((resp) => {
-        const ctx2 = document.getElementById('allParksPerAgeGraph');
+        const ctx3 = document.getElementById('allParksPerAgeGraph');
         var nombres = resp.map(function (e) {
             return e.nombreCategoria;
         });
         var data = resp.map(function (e) {
             return e.totalVisitantes;
         });
-        var config2 = {
+        var config3 = {
             type: 'doughnut',
             data: {
                 labels: nombres,
@@ -162,7 +174,10 @@ async function getVisitorsPerAgeAll() {
                 maintainAspectRatio: false,
             }
         };
-        var chart2 = new Chart(ctx2, config2);
+        if (chart3) {
+            chart3.destroy();
+        }
+        chart3 = new Chart(ctx3, config3);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({
@@ -175,7 +190,7 @@ async function getVisitorsPerAgeAll() {
 
 async function getVisitorsSum(parqueA, fecha1A, fecha2A) {
     feather.replace({'aria-hidden': 'true'});
-    const ctx = document.getElementById('visitorsSumGraph');
+    const ctx4 = document.getElementById('visitorsSumGraph');
     await $.ajax({
         url: 'DetalleRegistroController',
         type: 'POST',
@@ -187,7 +202,7 @@ async function getVisitorsSum(parqueA, fecha1A, fecha2A) {
         var data = resp.map(function (e) {
             return e.totalVisitantes;
         });
-        var config = {
+        var config4 = {
             type: 'line',
             data: {
                 labels: fechaCreacion,
@@ -210,7 +225,10 @@ async function getVisitorsSum(parqueA, fecha1A, fecha2A) {
                 }
             }
         };
-        var chart = new Chart(ctx, config);
+        if (chart4) {
+            chart4.destroy();
+        }
+        chart4 = new Chart(ctx4, config4);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({
@@ -228,14 +246,14 @@ async function getVisitorsPerDay(parqueA, fecha1A) {
         type: 'POST',
         data: {method: "getVisitorsPerDay", idParqueCase2: parseInt(parqueA), fecha1Case2: fecha1A}
     }).done((resp) => {
-        const ctx2 = document.getElementById('otro');
+        const ctx5 = document.getElementById('otro');
         var nombres = resp.map(function (e) {
             return e.nombreCategoria;
         });
         var data = resp.map(function (e) {
             return e.totalVisitantes;
         });
-        var config2 = {
+        var config5 = {
             type: 'bar',
             data: {
                 labels: nombres,
@@ -271,7 +289,10 @@ async function getVisitorsPerDay(parqueA, fecha1A) {
                 }
             }
         };
-        var chart2 = new Chart(ctx2, config2);
+        if (chart5) {
+            chart5.destroy();
+        }
+        chart5 = new Chart(ctx5, config5);
     }).fail((error) => {
         console.log(error.statusText);
         Swal.fire({

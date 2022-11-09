@@ -113,9 +113,8 @@ public class RegistroController extends HttpServlet {
 
                     case "getReporte":
                         System.out.println("Entro");
-                        String fechaReporte = request.getParameter("fecha");
-                        LocalDate dateReport = LocalDate.parse(fechaReporte);
-                        generarReporte(response, Date.valueOf(dateReport));
+                        Date fecha = Date.valueOf(request.getParameter("fecha"));
+                        generarReporte(response, fecha);
                         break;
                     default:
                         throw new AssertionError();

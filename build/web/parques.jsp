@@ -171,7 +171,7 @@
                     <label class="form-label" for="txtNombre1">Nombre Parque</label>
                     <input type="text" id="txtNombre1" name="txtNombre"
                            placeholder="Nombre del parque" required minlength="5" maxlength="100" class="form-control"><br>
-                    <label class="form-label" for="txtPais1">Id Empleado</label>
+                    <label class="form-label" for="txtPais1">Pais</label>
                     <input type="text" id="txtPais1" name="txtPais"
                            placeholder="País" required minlength="4" maxlength="100" class="form-control"><br>
                     <label class="form-label" for="txtEstado1">Estado</label>
