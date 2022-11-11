@@ -234,7 +234,7 @@ async function getVisitorsSum(parqueA, fecha1A, fecha2A) {
         Swal.fire({
             icon: 'warning',
             title: 'Oops...',
-            text: `${error.statusText}`
+            text: `Este parque no posee registros en la fecha especificada`
         });
     });
 }
@@ -298,7 +298,7 @@ async function getVisitorsPerDay(parqueA, fecha1A) {
         Swal.fire({
             icon: 'warning',
             title: 'Oops...',
-            text: `${error.statusText}`
+            text: `Este parque no posee registros en la fecha especificada`
         });
     });
 }
